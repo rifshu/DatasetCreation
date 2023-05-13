@@ -4,17 +4,19 @@ Created on Fri May 12 15:52:09 2023
 
 @author: Shaik
 """
+#importing necessary libraries
 import random
 import torch
 from PIL import Image
 
+""" The combine_images function accepts two image inputs: an object image and a background image"""
 def combine_images(object_image, background_image):
     
-      
-    # Randomly place the object image over the background image
+    # get width, height of both the images i.e background images and object images
     background_width, background_height = background_image.size
     object_width, object_height = object_image.size
     
+    #calculate 
     max_x_offset = background_width - object_width
     max_y_offset = background_height - object_height
     
@@ -32,11 +34,7 @@ def combine_images(object_image, background_image):
     alpha_channel = alpha_channel.point(lambda x: 255 if x != 255 else 0)
     object_image.putalpha(alpha_channel)
     
-    # Create mask for object image
-    # object_mask = object_image.convert('L')
-    
-    
-    
+     
     background_image.paste(object_image, (x_offset, y_offset), object_image)
     
     # Create target dictionary with transformed bounding box coordinates
