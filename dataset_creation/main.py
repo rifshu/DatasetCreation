@@ -1,14 +1,17 @@
+
+#import necessary librabries
 import os
 import random
 import torch
 from tqdm import tqdm
-
 from PIL import Image
 from torch.utils.data import Dataset
 import sys,  inspect
-
 from torchvision import transforms
 import xml.etree.ElementTree as ET
+
+"""combine_images: function used to generate final combines images and target
+    save_target_as_xml : function used to save the targets in the xml format """
 from combine_images import combine_images
 from xml_target import save_target_as_xml
 
