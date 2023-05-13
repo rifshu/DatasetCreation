@@ -4,7 +4,7 @@ Created on Fri May 12 15:52:09 2023
 
 @author: Shaik
 """
-#importing necessary libraries
+#import necessary libraries
 import random
 import torch
 from PIL import Image
@@ -16,9 +16,13 @@ def combine_images(object_image, background_image):
     background_width, background_height = background_image.size
     object_width, object_height = object_image.size
     
-    #calculate 
+    #calculate maximum offset 
     max_x_offset = background_width - object_width
     max_y_offset = background_height - object_height
+    
+    """ calculate random x and y offsets within the maximum offset limits. 
+    These offsets are used to define the bounding box coordinates of the object image on the background image. 
+    The bounding box coordinates are defined by xmin, ymin, xmax, and ymax."""
     
     x_offset = random.randint(0, max_x_offset)
     y_offset = random.randint(0, max_y_offset)
@@ -34,7 +38,7 @@ def combine_images(object_image, background_image):
     alpha_channel = alpha_channel.point(lambda x: 255 if x != 255 else 0)
     object_image.putalpha(alpha_channel)
     
-     
+    # Paste the object_image onto the background_image at the random offsets using the paste method of the Image module. 
     background_image.paste(object_image, (x_offset, y_offset), object_image)
     
     # Create target dictionary with transformed bounding box coordinates
@@ -43,6 +47,7 @@ def combine_images(object_image, background_image):
     target['height'] = object_height
     target['bnbbox'] = torch.tensor([[xmin,xmax, ymin,ymax]], dtype=torch.float32)
     target['depth'] = 24
+    """target['area'] Based on the requirement, can be calculated"""
     # target['area'] = torch.tensor([(xmax-xmin) * (ymax-ymin)], dtype=torch.float32)
     
     return background_image, target 
