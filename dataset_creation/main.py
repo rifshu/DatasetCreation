@@ -91,15 +91,7 @@ class CustomDataset(Dataset):
         final_image = transforms.ToTensor()(final_image)
         return final_image, target
     
-    
-#     def collate_fn(self, batch):
-#         images = []
-#         targets = []
-#         for img, target in batch:
-#             images.append(torch.tensor(img).unsqueeze(0))
-#             targets.append(target)
-#         return torch.cat(images), targets
-    
+
 
 
 

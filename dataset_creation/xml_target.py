@@ -66,3 +66,16 @@ def save_target_as_xml(target, filename ,target_path ):
 
     tree = ET.ElementTree(annotation)
     tree.write(target_path)
+    
+    
+    
+    
+        
+#     def collate_fn(self, batch):
+#         images = []
+#         targets = []
+#         for img, target in batch:
+#             images.append(torch.tensor(img).unsqueeze(0))
+#             targets.append(target)
+#         return torch.cat(images), targets
+    
