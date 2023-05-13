@@ -69,30 +69,32 @@ class CustomDataset(Dataset):
         
         # Load object and background images, and apply any transforms
         object_image = Image.open(os.path.join(self.object_dir, object_filename)).convert('RGB')
-        # object_image = Image.open(os.path.join(self.object_dir, object_filename))
         background_filename = random.choice([f for f in os.listdir(self.background_dir) if f.endswith('.jpg') or f.endswith('.jpeg')])
         background_image = Image.open(os.path.join(self.background_dir, background_filename)).convert('RGB')
+        
+        """transform can be applied to both background and object images respectively.
+            help in increment of number of samples(combined image) and final targets"""
         if self.transform:
             object_image = self.transform(object_image)
             # background_image = self.transform(background_image)
         
-        # Combine object and background images
-       
-        # background_image = transforms.ToPILImage()(background_image)
+        # Combine object and background images   
         object_image = transforms.ToPILImage()(object_image)
+        # background_image = transforms.ToPILImage()(background_image)
         final_image, target = combine_images(object_image, background_image)
         target['labels'] = class_label
+        
+        """based on requirement target['image_id']  , target['iscrowd'] can also be calculated."""
         # target['image_id'] = torch.tensor([idx])
         # target['iscrowd'] = torch.zeros((1,), dtype=torch.int64)
-        # Save image and target as XML files
+        
+        # Save image and target as XML files in a same target dir
         image_filename = f'image_{idx}.jpg'
         target_filename = f'image_{idx}.xml'
         final_image.save(os.path.join(self.target_dir, image_filename))
-       
         save_target_as_xml(target, target_filename , os.path.join(self.target_dir, target_filename))
-        
-        final_image = transforms.ToTensor()(final_image)
-        return final_image, target
+                
+        return 
     
 
 
@@ -101,13 +103,13 @@ class CustomDataset(Dataset):
 
 if __name__ == '__main__':
     
-    custom_dataset = CustomDataset(object_dir='C:/Users/Shaik/Desktop/dataset_creation/raw_data/objects', 
-                                   background_dir='C:/Users/Shaik/Desktop/dataset_creation/raw_data/backgrounds', 
-                                   target_dir= 'C:/Users/Shaik/Desktop/dataset_creation/raw_data/combined_dataset',
+    custom_dataset = CustomDataset(object_dir='C:/path/objects', 
+                                   background_dir='C:/path/backgrounds', 
+                                   target_dir= 'C:/path/combined_dataset',
                                    transform=transforms.Compose([transforms.Resize((224, 224)),transforms.ToTensor()])
                                    , num_samples = 150000)
     
     
     for idx in tqdm(range(len(custom_dataset)), desc= 'Generating_Data'):
-        image, target = custom_dataset[idx]
+       Datasett = custom_dataset[idx]
         
