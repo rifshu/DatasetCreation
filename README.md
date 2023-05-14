@@ -18,5 +18,7 @@ The given code generates a custom dataset by combining object images and backgro
 
 ![goku_ss front (class_object)](https://github.com/rifshu/DatasetCreation/assets/97952229/010a5c4d-871f-4c9e-b64e-50f8c669e0d8  "Goku (object class image")
 
+![combined image(object image over background image](https://github.com/rifshu/DatasetCreation/assets/97952229/39bd5890-abc6-4572-8b2a-115488a79cbc "final_combined image")
+
 
 
