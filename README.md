@@ -19,7 +19,7 @@ The given code generates a custom dataset by combining object images and backgro
 
 
 
-# final image ( backgroun dimage + object class image)
+# final image ( background image + object class image)
 ![combined image(object image over background image](https://github.com/rifshu/DatasetCreation/assets/97952229/39bd5890-abc6-4572-8b2a-115488a79cbc "final_combined image")
 
 
