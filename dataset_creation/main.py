@@ -103,9 +103,9 @@ class CustomDataset(Dataset):
 
 if __name__ == '__main__':
     
-    custom_dataset = CustomDataset(object_dir='C:/path/objects', 
-                                   background_dir='C:/path/backgrounds', 
-                                   target_dir= 'C:/path/combined_dataset',
+    custom_dataset = CustomDataset(object_dir='C:/Git_hub/DatasetCreation/dataset_creation/raw_data/objects', 
+                                   background_dir='C:/Git_hub/DatasetCreation/dataset_creation/raw_data/backgrounds', 
+                                   target_dir= 'C:/Git_hub/DatasetCreation/dataset_creation/raw_data/combined_dataset',
                                    transform=transforms.Compose([transforms.Resize((224, 224)),transforms.ToTensor()])
                                    , num_samples = 150000)
     
